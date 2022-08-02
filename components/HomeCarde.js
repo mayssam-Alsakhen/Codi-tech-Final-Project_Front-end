@@ -8,8 +8,10 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { ImLocation2 } from "react-icons/im";
 import Link from "next/link";
+import axios from "axios";
 
-export default function HomeCarde() {
+
+export default function HomeCarde({res}) {
   const card = [
     {
       id: 1,
@@ -89,4 +91,20 @@ export default function HomeCarde() {
       ))}
     </div>
   );
+}
+
+
+export async function getStaticProps(){
+
+  const data =await axios.get('localhost:8000/api/post')
+  const res = await data.json()
+  console.log(res);
+  console.log(data);
+
+
+  return{
+    props:{
+      res
+    }
+  }
 }

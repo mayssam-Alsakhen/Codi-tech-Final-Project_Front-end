@@ -88,7 +88,7 @@ export default function Nav() {
       />
 </div>
 {Menu ? (
-        <div className="flex mt-16 right-0 z-30 fixed justify-end ">
+        <div className="flex mt-16 right-0 z-30 fixed justify-end">
           <div className=" bg-gradient-to-l from-secondary to-[#49b1e9] w-[500px] h-[500px] rounded-b-[50%] sm:w-[400px] rounded-l-[50%] flex-col flex items-center ml-7">
             <div
               className="flex justify-end  w-full"
