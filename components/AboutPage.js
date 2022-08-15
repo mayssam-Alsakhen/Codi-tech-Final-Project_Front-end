@@ -1,4 +1,9 @@
 import Heading from "./Reusable/Heading";
+import Image from "next/image";
+import login from '../public/login.png'
+import register from '../public/register.png'
+import add from '../public/add.png'
+import form from '../public/form.png'
 
 export default function AboutPage() {
   return (
@@ -14,10 +19,39 @@ export default function AboutPage() {
 </div>
 <div className=" mt-9">
   <Heading text="how" text2="to" text3="use" text4="it"/>
-<div className="w-[50%] text-lg md:w-[80%] mx-auto text-justify leading-8">
-- You can regitster by clicking 'regitster' button in the top right of the page <br/>
-- then you can add a post by clicking 'Add a post' button in the buttom right of the page 
-
+<div className="w-[80%] mx-auto text-lg ">
+  <div className=" gap-32 flex  items-center md:flex-col md:gap-5 py-3">
+    <div className=" border-primary border-2 flex w-[30%] md:w-[70%] mx-auto">
+  <Image src={login} alt="login button for missed and found" width={320} height={70} />
+  </div>
+  <p className=" text-start w-[60%] md:w-[95%] mx-auto">
+- Click on login button to login or register
+</p>
+</div>
+<div className=" gap-32 flex  items-center md:flex-col md:gap-5 py-3">
+  <div className=" border-primary border-2 flex w-[30%] md:w-[70%] mx-auto">
+  <Image src={register} alt="login button for missed and found" width={500} height={300} />
+  </div>
+  <p className=" text-start w-[60%] md:w-[95%] mx-auto">
+- Fill the form to log in, If you do not have an account click on 'register' button and submit it.
+</p>
+</div>
+<div className=" gap-32 flex  items-center md:flex-col md:gap-5 py-3">
+  <div className=" border-primary border-2 flex w-[30%] md:w-[70%] mx-auto">
+  <Image src={add} alt="add button for missed and found" width={300} height={150} />
+  </div>
+  <p className=" text-start w-[60%] md:w-[95%] mx-auto">
+- After that you can click on 'Add A Post' button below.
+</p>
+</div>
+<div className=" gap-32 flex  items-center md:flex-col md:gap-5 py-3">
+  <div className=" border-primary border-2 flex w-[30%] md:w-[70%] mx-auto">
+  <Image src={form} alt="add form missed and found" width={300} height={150} />
+  </div>
+  <p className=" text-start w-[60%] md:w-[95%] mx-auto">
+- Fill all the form to the end and add it by clicking 'Add' button.
+</p>
+</div>
 </div>
 </div>
     </div>

@@ -8,21 +8,10 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { ImLocation2 } from "react-icons/im";
 import Link from "next/link";
-import axios from "axios";
 
 
-export default function HomeCarde({res}) {
-  const card = [
-    {
-      id: 1,
-      img: img,
-      title: "missed",
-      gender: "male",
-      email: "poster email",
-      phone: "090909",
-      address: "something",
-    },
-  ];
+
+export default function HomeCarde(props) {
 
   const [show, setShow] = useState(false);
   const more = () => {
@@ -34,8 +23,8 @@ export default function HomeCarde({res}) {
 
   return (
     <div>
-      {card.map((m) => (
-        <div key={m.id} className="w-72 h-[600px] m-7 sm:mx-auto flex  flex-col items-center">
+      
+        <div className="w-72 h-[600px] m-7 sm:mx-auto flex  flex-col items-center">
           <div className="h-fit rounded-3xl">
             <Image
               style={{ borderRadius: "24px" }}
@@ -48,11 +37,10 @@ export default function HomeCarde({res}) {
           <div
             style={{ boxShadow: "3px 4px 15px 10px #888888" }}
             className="pt-60 mt-[-230px] w-80 h-fit"
-            key={m.id}
           >
             <div className="text-center capitalize bg">
-              <span className=" text-3xl "> {m.title}</span>
-              <p>{m.gender}</p>
+              <span className=" text-3xl "> {props.status}</span>
+              <p>{props.gender}</p>
             </div>
             {show ? (
               <div className=" flex justify-end text-xl m-3" onClick={less}>
@@ -67,18 +55,18 @@ export default function HomeCarde({res}) {
               <div>
                 <div className="mx-[6px] my-4 text-gray-600 flex justify-between items-center">
                   <SiGmail className=" text-2xl" />
-                  <p className=" whitespace-nowrap">{m.email}</p>
+                  <p className=" whitespace-nowrap">{props.userEmail}</p>
                 </div>
 
                 <div className="mx-[6px] my-4 text-gray-600 flex justify-between items-center">
                   <FaPhoneAlt className=" text-2xl" />
-                  <p className=" whitespace-nowrap">{m.phone}</p>
+                  <p className=" whitespace-nowrap">{props.userPhone}</p>
                 </div>
                 <div className="mx-[6px] my-4 text-gray-600 flex justify-between items-center">
                   <ImLocation2 className="text-2xl" />
-                  <p className=" whitespace-nowrap">{m.address}</p>
+                  <p className=" whitespace-nowrap">{props.address}</p>
                 </div>
-                <Link href="/profile">
+                <Link href={`/Profiles/`+ props.id}>
                   <div className="cursor-pointer mx-[6px] my-4 text-gray-600 flex justify-between items-center">
                     <FaUserCircle className=" text-2xl" />
                     <p className=" whitespace-nowrap">view profile</p>
@@ -88,23 +76,6 @@ export default function HomeCarde({res}) {
             ) : null}
           </div>
         </div>
-      ))}
     </div>
   );
-}
-
-
-export async function getStaticProps(){
-
-  const data =await axios.get('localhost:8000/api/post')
-  const res = await data.json()
-  console.log(res);
-  console.log(data);
-
-
-  return{
-    props:{
-      res
-    }
-  }
 }

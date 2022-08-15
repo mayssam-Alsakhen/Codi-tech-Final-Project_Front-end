@@ -1,17 +1,28 @@
 import Link from "next/link";
 import { Navl } from "./Navl";
 import Image from "next/image";
-import logo from "../../public/logo.webp";
+import logo from "../../public/mylogo.png";
 import { useRouter } from "next/router";
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { VscSearch } from "react-icons/vsc";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UseReadingProgress from "../Hooks/UseReadingProgress";
 import Button from "../Reusable/Button";
 import Input from "../Reusable/Input";
 
 export default function Nav() {
+
+  const logout = () => {
+    localStorage.clear();
+    window.location.reload("/");
+  }
+
+
+const [token, setToken] = useState('');
+useEffect(()=>{
+  setToken(localStorage.getItem('user_data'))
+})
   var primary = "#9e0404";
   const [Menu, setMenu] = useState(false);
   const completion = UseReadingProgress();
@@ -61,6 +72,17 @@ export default function Nav() {
           </div>
 
           <div className="flex items-center">
+            {token
+            ?
+            <div onClick={()=> logout()}>
+              <Button
+                text="Logout"
+                href="/"
+                backgroundColor={primary}
+                color="white"
+              />
+            </div>
+            :
             <div>
               <Button
                 text="Login"
@@ -69,6 +91,7 @@ export default function Nav() {
                 color="white"
               />
             </div>
+              }
             {Menu ? null : (
               <div
                 className={`hidden w-10 h-10 sm:h-7  sm:w-7 justify-center  md:inline-flex items-center rounded-full border-2 border-white`}
@@ -88,10 +111,10 @@ export default function Nav() {
       />
 </div>
 {Menu ? (
-        <div className="flex mt-16 right-0 z-30 fixed justify-end">
-          <div className=" bg-gradient-to-l from-secondary to-[#49b1e9] w-[500px] h-[500px] rounded-b-[50%] sm:w-[400px] rounded-l-[50%] flex-col flex items-center ml-7">
+        <div className="bg-primary w-1/3 sm:w-2/3 top-0 bottom-0 right-0 z-30 fixed pt-12 px-2 text-end">
+          <div className="">
             <div
-              className="flex justify-end  w-full"
+              className="flex justify-end w-full"
               onClick={() => {
                 setMenu(false);
               }}
@@ -99,18 +122,17 @@ export default function Nav() {
               {" "}
               <IoIosCloseCircleOutline className=" text-4xl m-3 text-white" />
             </div>
-            <div className=" flex justify-end w-full">
+            <div className=" w-full flex justify-end">
+             <div className="flex justify-end mt-7 items-center">
               <Input
-                type="text"
-                marginTop="28px"
-                width="80%"
-                id="side search"
+              width="170px"
               />
-              <label htmlFor="side search">
-                <VscSearch className=" w-7 h-7 text-[25px] sm:text-[20px] text-white mt-7 mx-9" />
+                <label htmlFor="side search">
+                <VscSearch className=" w-7 h-7 text-[25px] sm:text-[20px] text-white" />
               </label>
+              </div>
             </div>
-            <ul className=" flex flex-col content-between justify-between h-60 self-center mt-9">
+            <ul className=" flex flex-col content-between justify-between h-60 self-center mt-9 px-12">
               {Navl.map((k) => {
                 return (
                   <li key={k.id} >

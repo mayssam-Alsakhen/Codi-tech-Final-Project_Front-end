@@ -2,10 +2,18 @@ import { FaUserAlt } from "react-icons/fa";
 import { AiFillLock } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import { ImLocation2 } from "react-icons/im";
-import { AiFillEye } from "react-icons/ai";
+import { useRouter } from 'next/router'
+// import { AiFillEye } from "react-icons/ai";
+import axios from "axios";
 import { BsTelephoneFill } from "react-icons/bs";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import Popup from "../components/Reusable/Popup";
 export default function Login() {
+  const router = useRouter()
+  const [data, setData] = useState({});
+  const [user, setUser] = useState ({});
+  const [open, setOpen] = useState(false)
+  const register = useRef();
   useEffect(() => {
     const sign_in_btn = document.querySelector("#sign-in-btn");
     const sign_up_btn = document.querySelector("#sign-up-btn");
@@ -18,15 +26,15 @@ export default function Login() {
     sign_in_btn.addEventListener("click", () => {
       container.classList.remove("sign-up-mode");
     });
-    const togglePassword = document.querySelector("#togglePassword");
-    const password = document.querySelector("#id_password");
+    // const togglePassword = document.querySelector("#togglePassword");
+    // const password = document.querySelector("#id_password");
 
-    togglePassword.addEventListener("click", function (e) {
-      const type =
-        password.getAttribute("type") === "password" ? "text" : "password";
-      password.setAttribute("type", type);
-      this.classList.toggle("fa-eye-slash");
-    });
+    // togglePassword.addEventListener("click", function (e) {
+    //   const type =
+    //     password.getAttribute("type") === "password" ? "text" : "password";
+    //   password.setAttribute("type", type);
+    //   this.classList.toggle("fa-eye-slash");
+    // });
 
     const toggleReg = document.querySelector("#toggleReg");
     const pass = document.querySelector("#id_reg");
@@ -38,12 +46,63 @@ export default function Login() {
       this.classList.toggle("fa-eye-slash");
     });
   });
+
+  const submitRegister = async (e) => {
+    try {
+      e.preventDefault();
+      await axios.post("http://localhost:8000/api/register", data);
+      console.log('success');
+      router.push('/')
+    }
+     catch (error) {
+      console.log(error);
+    }
+    //  router.push('/')
+    register.current.reset()
+  };
+
+  const submitLogin = async (e) => {
+    try {
+      e.preventDefault();
+      console.log("user",user)
+      let response = await axios.post("http://localhost:8000/api/login", user);
+      console.log('success login',response);
+      if(response.status == 200){
+        // let token = response.data.token;
+        // console.log("token ",token)
+
+        localStorage.setItem("user_data", response.data.token)
+        localStorage.setItem('id' , response.data.user.id )
+        router.push('/')
+        //save the token in the local storage
+        //then navigate home page
+      }
+      else{
+        //unauthorized
+        //popup
+        
+        
+      }
+    } catch (error) {
+      setOpen(true)
+      console.log(error);
+    }
+    register.current.reset()
+  };
+  const handleLoginChange = (e) =>{
+    setUser((prev) => ({ ...prev, [e.target.name] :e.target.value}));
+  }
+
+  const handleChange = (e) => {
+    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
     <>
       <div className="container">
         <div className="forms-container">
           <div className="signin-signup">
-            <form action="" className="sign-in-form">
+            <form className="sign-in-form" onSubmit={submitLogin}>
               <h2 className="title">Login</h2>
               <div className="input-field">
                 <div className=" w-1/6 mx-4">
@@ -51,10 +110,11 @@ export default function Login() {
                 </div>
                 <input
                   type="text"
-                  name="username"
-                  autocomplete="username"
+                  name="email"
+                  autoComplete="username"
                   placeholder="Username"
-                  required="yes"
+                  required
+                  onChange={handleLoginChange}
                 />
               </div>
               <div className="input-field">
@@ -64,18 +124,18 @@ export default function Login() {
                 <input
                   type="password"
                   name="password"
-                  autocomplete="current-password"
+                  autoComplete="current-password"
                   placeholder="Password"
                   id="id_password"
-                  required="yes"
+                  required
+                  onChange={handleLoginChange}
                 />
-                {/* <div className=' w-1/6' id="togglePassword">< AiFillEye/></div> */}
                 <i className="far fa-eye" id="togglePassword"></i>
               </div>
               <input type="submit" value="Sign in" className="btn solid" />
             </form>
 
-            <form action="" className="sign-up-form">
+            <form className="sign-up-form" onSubmit={submitRegister} ref={register}>
               <h2 className="title">Register</h2>
               <div className="input-field">
                 <div className=" w-1/6 mx-4">
@@ -83,10 +143,11 @@ export default function Login() {
                 </div>
                 <input
                   type="text"
-                  name="username"
-                  autocomplete="username"
+                  name="name"
+                  autoComplete="username"
                   placeholder="Username"
-                  required="yes"
+                  required
+                  onChange={handleChange}
                 />
               </div>
               <div className="input-field">
@@ -96,9 +157,10 @@ export default function Login() {
                 <input
                   type="text"
                   name="phone number"
-                  autocomplete="phone number"
+                  autoComplete="phone number"
                   placeholder="Phone Number"
-                  required="yes"
+                  required
+                  onChange={handleChange}
                 />
               </div>
               <div className="input-field">
@@ -108,9 +170,10 @@ export default function Login() {
                 <input
                   type="email"
                   name="email"
-                  autocomplete="email"
+                  autoComplete="email"
                   placeholder="Email"
-                  required="yes"
+                  required
+                  onChange={handleChange}
                 />
               </div>
               <div className="input-field">
@@ -120,9 +183,10 @@ export default function Login() {
                 <input
                   type="text"
                   name="address"
-                  autocomplete="address"
+                  autoComplete="address"
                   placeholder="Address"
-                  required="yes"
+                  required
+                  onChange={handleChange}
                 />
               </div>
               <div className="input-field">
@@ -132,36 +196,47 @@ export default function Login() {
                 <input
                   type="password"
                   name="password"
-                  autocomplete="current-password"
+                  autoComplete="current-password"
                   placeholder="Password"
                   id="id_reg"
-                  required="yes"
+                  required
+                  onChange={handleChange}
                 />
                 <i className="far fa-eye" id="toggleReg"></i>
               </div>
-              <input
-                type="submit"
-                value="Register"
-                className="btn solid"
-              />
+              <div className="input-field">
+                <div className=" w-1/6 mx-4">
+                  <AiFillLock className=" text-xl" />
+                </div>
+                <input
+                  type="password"
+                  name="password_confirmation"
+                  autoComplete="current-password"
+                  placeholder="confirm Password"
+                  id="id_reg"
+                  required
+                  onChange={handleChange}
+                />
+                <i className="far fa-eye" id="toggleReg"></i>
+              </div>
+              <input type="submit" value="Register" className="btn solid" />
             </form>
           </div>
         </div>
 
-        <div className="panels-container">
-          <div className="panel left-panel">
-            <div className="content">
+        <div className="panels-container bg-[url('../public/sign.gif')] bg-contain bg-center bg-no-repeat">
+          <div className="panel left-panel  ">
+            <div className="content ">
               <h3>You don't have an account?</h3>
               <p>Create your account right now to add a post and comments.</p>
               <button className="btn transparent" id="sign-up-btn">
                 Register
               </button>
             </div>
-            {/* <img src="img/log.svg" className="image" alt=""/> */}
           </div>
 
-          <div className="panel right-panel">
-            <div className="content">
+          <div className="panel right-panel ">
+            <div className="content right-panel">
               <h3>Already have an account?</h3>
               <p>
                 Login to see your posts and post your new comments or posts.
@@ -170,9 +245,11 @@ export default function Login() {
                 Sign in
               </button>
             </div>
-            {/* <img src="img/register.svg" className="image" alt=""/> */}
           </div>
         </div>
+        <Popup trigger={open} onBlur={() => setOpen(false)}>
+        <h1 className=" text-xl mt-11">Email Or Password Are Exist. <br/> Please Try Again.</h1>
+       </Popup>
       </div>
     </>
   );

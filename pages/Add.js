@@ -2,17 +2,76 @@ import Input from "../components/Reusable/Input";
 import Image from "next/image";
 import { RiCameraOffFill } from "react-icons/ri";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import Button from "../components/Reusable/Button";
-export default function Add() {
-  const [mouseIn, setMouseIn] = useState(false);
+import { useRouter } from "next/router";
+
+function Add() {
+  let router = useRouter();
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
-  const onIn = () => {
-    setMouseIn(true);
+  const [name, setName] = useState('');
+  const [age, setAge] = useState(0);
+  const [gender, setGender] = useState('');
+  const [status, setStatus] = useState('');
+  const [address, setAddress] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      // name: name,
+      // age: 5,
+      gender: 'f',
+      status: 'missed',
+      description: description,
+      address: address,
+    };
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+    console.log("data ",data, config)
+    //here i mean you need to add the token in the header
+    try {
+      let res = await axios.post("http://localhost:8000/api/post", data);
+      console.log("res ",res)
+    } catch (err) {
+      console.log(err);
+    }
   };
-  const onOut = () => {
-    setMouseIn(false);
-  };
+
+  // useEffect(()=>{
+  //   setToken(localStorage.getItem('userData'))
+  //   if(token){
+  //     window.location.assign('/Login')
+  //   }
+  //   else{
+  //     window.location.assign('/Add')
+  //   }
+  // })
+
+  // useEffect(()=>{
+
+  //   let token = localStorage.getItem('user_data');
+  //   if(token){
+  //   router.push('/Add')
+  //   }
+  //   else{
+  //   router.push('Login')
+  //   }
+
+  // })
+
+  /*
+
+    const config = {
+      "Authorization" : `Bearer ${localstorage.getItem(user.token)}`
+    }
+
+    axios.post('/api/endpoint', {request_body}, config)
+  */
 
   useEffect(() => {
     if (image) {
@@ -32,6 +91,8 @@ export default function Add() {
     <div>
       <div className=" py-32">
         <form
+          noValidate
+          onSubmit={handleSubmit}
           style={{ boxShadow: "0px 0px 4px 5px gray" }}
           className=" w-[70%] mx-auto p-7 md:w-[85%] sm:w-[95%]"
         >
@@ -65,7 +126,6 @@ export default function Add() {
                 event.preventDefault();
                 fileInputRef.current.click();
               }}
-              required
             >
               {" "}
             </button>
@@ -73,6 +133,7 @@ export default function Add() {
 
           <div className=" hidden">
             <input
+              required
               type="file"
               accept="image/*"
               ref={fileInputRef}
@@ -91,21 +152,40 @@ export default function Add() {
               <Input
                 label=" Name"
                 id="name"
+                value={name}
+                name="name"
                 htmlFor="name"
                 width="100%"
                 type="text"
                 required="required"
+                onChange={ (e)=> setName(e.target.value)}
               />
             </div>
             <div className="w-[48%] md:w-full sm:my-3">
-              <Input
+              <label className=" text-primary" htmlFor="status">
+                Status
+              </label>
+              <select
+              value={status}
+                name=" status"
+                className="outline-none w-full my-2 h-9 px-2"
+                id="status"
+                onChange={ (e)=> setStatus(e.target.value)}
+
+              >
+                <option></option>
+                <option value={status}  onChange={ (e)=> setStatus(e.target.value)}>Missed</option>
+                <option value={status}  onChange={ (e)=> setStatus(e.target.value)}>Found</option>
+              </select>
+
+              {/* <Input
                 label="Status"
                 htmlFor="status"
                 id="status"
                 width="100%"
                 type="text"
                 required="required"
-              />
+              /> */}
             </div>
           </div>
           <div className="w-full flex justify-between my-3 sm:my-0 md:flex-col">
@@ -115,22 +195,40 @@ export default function Add() {
                 id="age"
                 htmlFor="age"
                 width="100%"
+                value={age}
                 type="text"
                 required="required"
+                name="age"
+                onChange={(e) => setAge(e.target.value)}
               />
             </div>
             <div className="w-[48%] md:w-full sm:my-3">
-              <Input
+              <label className=" text-primary" htmlFor="gender">
+                Gender
+              </label>
+              <select
+                name=" gender"
+                value={gender}
+                className="outline-none w-full my-2 h-9 px-2"
+                id="gender"
+                onChange={ (e)=> setGender(e.target.value)}
+
+              >
+                <option></option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+              {/* <Input
                 label="Gender"
                 htmlFor="gender"
                 id="gender"
                 width="100%"
                 type="text"
                 required="required"
-              />
+              /> */}
             </div>
           </div>
-          <div className="w-full flex justify-between my-3 sm:my-0 md:flex-col">
+          {/* <div className="w-full flex justify-between my-3 sm:my-0 md:flex-col">
             <div className=" w-[48%] md:w-full">
               <Input
                 label="Email Address"
@@ -139,6 +237,8 @@ export default function Add() {
                 width="100%"
                 type="email"
                 required="required"
+                name="email"
+                onChange={handleChange}
               />
             </div>
             <div className="w-[48%] md:w-full sm:my-3">
@@ -151,7 +251,7 @@ export default function Add() {
                 required="required"
               />
             </div>
-          </div>
+          </div> */}
           <div className=" w-full my-3">
             <Input
               label="Address"
@@ -159,7 +259,11 @@ export default function Add() {
               id="address"
               width="100%"
               type="text"
+              value={address}
+              name="address"
               required="required"
+              onChange={ (e)=> setAddress(e.target.value)}
+
             />
           </div>
           <div className=" my-3 w-full">
@@ -168,17 +272,26 @@ export default function Add() {
             </label>
             <textarea
               required
-              style={{ boxShadow: mouseIn ? "0px 0px 10px 2px #9e0404" : "" }}
-              onBlur={onOut}
-              onFocus={onIn}
+              value={description}
               id="description"
               className="w-full bg-[#DDD] outline-none p-2 my-2"
               rows={9}
+              name="description"
+              onChange={ (e)=> setDescription(e.target.value)}
+              
             />
           </div>
-          <Button text="add" backgroundColor="#9e0404" color="white" type="submit" fontSize="20px"/>
+          <Button
+            text="add"
+            backgroundColor="#9e0404"
+            color="white"
+            type="submit"
+            fontSize="20px"
+          />
         </form>
       </div>
     </div>
   );
 }
+
+export default Add;
