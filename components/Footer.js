@@ -2,6 +2,7 @@ import Image from "next/image";
 import logo from "../public/mylogo.png";
 import { Navl } from "./nav/Navl";
 import Link from "next/link";
+import Popup from '../components/Reusable/Popup'
 import { useRouter } from "next/router";
 import Button from "./Reusable/Button";
 import Input from "./Reusable/Input";
@@ -11,6 +12,8 @@ import {useRef, useState } from "react";
 export default function Footer() {
   let router = useRouter();
   const [mouseIn, setMouseIn] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [sent, setSent] = useState(false)
   const form = useRef();
   const onIn = () => {
     setMouseIn(true);
@@ -19,13 +22,14 @@ export default function Footer() {
     setMouseIn(false);
   };
   const handleSubmit = (e) =>{
+    setSent(true)
     e.preventDefault();
-
     emailjs.sendForm('service_7t8dkcp', 'template_h4shwmb', form.current, 'pJwIzZeW45XFNWPpw')
     .then((result) =>{
       console.log(result.text);
     },
     (error)=>{
+      setOpen(true)
       console.log(error.text)
     })
     // e.target.reset()
@@ -108,6 +112,12 @@ export default function Footer() {
         Copyright © {new Date().getFullYear()} Missed & Found
       </div>
     </div>
+    <Popup trigger={open} onBlur={() => setOpen(false)}>
+        <h1 className=" text-xl mt-11">Please Check Your Connection And Try Again.</h1>
+       </Popup>
+       <Popup trigger={sent} onBlur={() => setSent(false)}>
+        <h1 className="w-[70%] mx-auto text-xl mt-11 capitalize">your message has sent successfully.<br/>will get back to you as soon as possible. pleasee be patient  &#128525;</h1>
+       </Popup>
     </div>
   );
 }

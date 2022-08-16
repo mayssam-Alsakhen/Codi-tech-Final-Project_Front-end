@@ -10,7 +10,6 @@ export default function CardList() {
     const getAllCard = async () =>{
       const res= await axios.get("http://localhost:8000/api/post")
       setCards(res.data.data);
-      // console.log(cards)
   
     }
   
@@ -25,11 +24,14 @@ export default function CardList() {
      
 
          <div className=' flex-wrap flex justify-around'>
-             {cards.map((card) =>{
+             {cards.map((card) =>{              
                  return(
-                     <HomeCarde key={card.id} id={card.id} status={card.status} gender={card.gender} address={card.address} userEmail={card.user.email} userPhone={card.user.phone_number} />
+                  
+                     <HomeCarde key={card.id} id={card.id} image={`http://localhost:8000/uploads/posts/${card.image}`} status={card.status} gender={card.gender} address={card.address} userEmail={card.user.email} userPhone={card.user.phone_number} />
+                     
                  )
-             })}
+             })
+             }
         </div>
     </div>
   )

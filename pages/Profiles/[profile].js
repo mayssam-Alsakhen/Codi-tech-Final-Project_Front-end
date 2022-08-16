@@ -8,8 +8,11 @@ import Heading from "../../components/Reusable/Heading";
 import { FaTransgender } from "react-icons/fa";
 import { MdPersonRemoveAlt1 } from "react-icons/md";
 import Comment from "../../components/Comment";
+import Popup from "../../components/Reusable/Popup";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Button from "../../components/Reusable/Button";
 
 export const getStaticPaths = async () => {
   const res = await axios.get("http://localhost:8000/api/post");
@@ -37,11 +40,42 @@ export const getStaticProps = async (context) => {
   };
 };
 
-const Profile = ({ dataFetched }) => {
-  const [postdata, setPostdata] = useState(dataFetched);
 
+const Profile = ({ dataFetched }) => {
+  const [ deleted, setDeleted] = useState(false)
+  const [ unDeleted, setUnDeleted] = useState(false)
+  let router= useRouter();
+  const deletePost = async(id) =>{
+    try{
+      await axios.delete(`http://localhost:8000/api/post/${id}`)
+      setDeleted(true)
+       router.push('/')
+    }catch(err){
+      setUnDeleted(true)
+     console.log(err)
+    }
+  
+  }
+  const [postdata, setPostdata] = useState(dataFetched);
+  const [your, setYour] = useState(false)
+  useEffect(()=>{
+    let userid = localStorage.getItem('id')
+    let id = dataFetched.user.id
+   
+    if(userid == id){
+      setYour(true)
+      console.log('true..')
+    }
+    else{
+      console.log('no..')
+      setYour(false)
+    }
+  },[])
   return (
     <div className="pb-20">
+      {your?
+      <div className=" mt-16 ">
+      <Button onClick={()=>{deletePost(postdata.id)}} text="Delete" border="2px solid #9e0404" color="#9e0404"/> </div>: ''}
       <Heading text="profile" />
       <div className=" flex items-center justify-center md:flex-col">
         <div className="w-1/4 mr-10 flex md:w-1/2 sm:w-[90%] md:mr-0 md:mb-6 flex-col">
@@ -52,8 +86,6 @@ const Profile = ({ dataFetched }) => {
             height={300}
           />
           <Comment />
-        
-
         </div>
         <div className="py-12 border-l-2 border-secondary  w-[65%] md:border-l-0 md:border-t-2 md:w-[90%] md:py-4 ">
           <div className=" text-justify text-lg leading-9 w-[85%] md:w-full mx-auto">
@@ -98,6 +130,14 @@ const Profile = ({ dataFetched }) => {
             </div>
           </div>
         </div>
+        <Popup trigger={deleted} onBlur={() => setDeleted(false)}>
+      <h1 className="text-xl  mt-11 capitalize"> The post was deleted successfully.</h1>
+     </Popup>
+
+     <Popup trigger={unDeleted} onBlur={() => setUnDeleted(false)}>
+      <h1 className="text-xl  mt-11 capitalize"> The post did not delete, please try again.</h1>
+     </Popup>
+     
       </div>
     </div>
   );

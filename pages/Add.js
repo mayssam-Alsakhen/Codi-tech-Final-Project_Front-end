@@ -17,52 +17,46 @@ function Add() {
   const [address, setAddress] = useState('');
   const [description, setDescription] = useState('');
 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = {
-      // name: name,
-      // age: 5,
-      gender: 'f',
-      status: 'missed',
-      description: description,
-      address: address,
-    };
+    const formData = new FormData() ;
+    formData.append('name', name)
+    formData.append('age', age)
+    formData.append('gender', gender)
+    formData.append('address', address)
+    formData.append('status', status)
+    formData.append('description', description)
+    formData.append('image', image)
+    
+    const token = localStorage.getItem('user_data');
     const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }
-    console.log("data ",data, config)
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
+
+  };
+
+   console.log("formData ",formData)
+
     //here i mean you need to add the token in the header
     try {
-      let res = await axios.post("http://localhost:8000/api/post", data);
-      console.log("res ",res)
+      let res = await axios.post("http://localhost:8000/api/post", formData, config);
+      console.log("response ",res)
     } catch (err) {
       console.log(err);
     }
   };
 
-  // useEffect(()=>{
-  //   setToken(localStorage.getItem('userData'))
-  //   if(token){
-  //     window.location.assign('/Login')
-  //   }
-  //   else{
-  //     window.location.assign('/Add')
-  //   }
-  // })
+  useEffect(()=>{
 
-  // useEffect(()=>{
+    let token = localStorage.getItem('user_data');
+    if(token){
+    router.push('/Add')
+    }
+    else{
+    router.push('Login')
+    }
 
-  //   let token = localStorage.getItem('user_data');
-  //   if(token){
-  //   router.push('/Add')
-  //   }
-  //   else{
-  //   router.push('Login')
-  //   }
-
-  // })
+  },[])
 
   /*
 
@@ -94,7 +88,8 @@ function Add() {
           noValidate
           onSubmit={handleSubmit}
           style={{ boxShadow: "0px 0px 4px 5px gray" }}
-          className=" w-[70%] mx-auto p-7 md:w-[85%] sm:w-[95%]"
+          className="w-[70%] mx-auto p-7 md:w-[85%] sm:w-[95%]"
+          encType="multipart/form-data"
         >
           <h1 className=" my-4 sm:mb-9 text-primary text-5xl sm:text-3xl font-bold">
             {" "}
@@ -133,6 +128,7 @@ function Add() {
 
           <div className=" hidden">
             <input
+              name="image"
               required
               type="file"
               accept="image/*"
@@ -166,7 +162,7 @@ function Add() {
                 Status
               </label>
               <select
-              value={status}
+                value={status}
                 name=" status"
                 className="outline-none w-full my-2 h-9 px-2"
                 id="status"
@@ -174,8 +170,8 @@ function Add() {
 
               >
                 <option></option>
-                <option value={status}  onChange={ (e)=> setStatus(e.target.value)}>Missed</option>
-                <option value={status}  onChange={ (e)=> setStatus(e.target.value)}>Found</option>
+                <option   onChange={ (e)=> setStatus(e.target.value)}>Missed</option>
+                <option   onChange={ (e)=> setStatus(e.target.value)}>Found</option>
               </select>
 
               {/* <Input

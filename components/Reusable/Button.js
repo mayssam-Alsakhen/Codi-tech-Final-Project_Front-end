@@ -9,12 +9,14 @@ export default function Button({
   margin,
   href,
   form,
+  onClick
 }) {
   return (
     <button
+    onClick={onClick}
       form={form}
       type={type}
-      className=" capitalize mx-5 py-2 px-4 whitespace-nowrap rounded-2xl w-28"
+      className=" capitalize mx-5 py-2 px-4 whitespace-nowrap rounded-2xl w-28 hover:font-bold"
       style={{ backgroundColor, color, border, width, fontSize, margin }}
     >
       {" "}

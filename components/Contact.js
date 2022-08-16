@@ -2,20 +2,26 @@ import {useRef, useState, SyntheticEvent } from "react";
 import Button from "./Reusable/Button";
 import Heading from './Reusable/Heading'
 import Input from "./Reusable/Input";
+import Popup from '../components/Reusable/Popup'
+
 import Image from "next/image";
 import illustration from '../public/Service.gif'
 import emailjs from '@emailjs/browser';
 
 export default function Contact() {
   const [mouseIn, setMouseIn] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [sent, setSent] = useState(false)
   const form = useRef()
   const handleSubmit = (e) =>{
     e.preventDefault();
     emailjs.sendForm('service_7t8dkcp', 'template_pwcye9r', form.current, 'pJwIzZeW45XFNWPpw')
     .then((result) =>{
       console.log(result.text);
+      setSent(true)
     },
     (error)=>{
+      setOpen(true)
       console.log(error.text)
     })
     form.current.reset()
@@ -135,6 +141,12 @@ export default function Contact() {
             
           />
         </div>
+        <Popup trigger={open} onBlur={() => setOpen(false)}>
+        <h1 className=" text-xl mt-11">Please Check Your Connection And Try Again.</h1>
+       </Popup>
+       <Popup trigger={sent} onBlur={() => setSent(false)}>
+        <h1 className="w-[70%] mx-auto text-xl mt-11 capitalize">your message has sent successfully.<br/>will get back to you as soon as possible. pleasee be patient  &#128525;</h1>
+       </Popup>
       </div>
     </div>
   );

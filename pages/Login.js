@@ -248,7 +248,7 @@ export default function Login() {
           </div>
         </div>
         <Popup trigger={open} onBlur={() => setOpen(false)}>
-        <h1 className=" text-xl mt-11">Email Or Password Are Exist. <br/> Please Try Again.</h1>
+        <h1 className=" text-xl mt-11">Email Or Password Are Not Exist. <br/> Please Try Again.</h1>
        </Popup>
       </div>
     </>

@@ -101,7 +101,7 @@ return (
         </div>
    <div className="mt-4">
         {comments.map((comment)=> { return(
-    <div className=" flex justify-around my-2">
+    <div key={comment.id} className=" flex justify-around my-2">
   <div className=" w-9 h-9 rounded-full bg-secondary flex justify-center items-center">
         MR
       </div>

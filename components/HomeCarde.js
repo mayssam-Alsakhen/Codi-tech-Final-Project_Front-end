@@ -22,13 +22,12 @@ export default function HomeCarde(props) {
   };
 
   return (
-    <div>
-      
+    <div>      
         <div className="w-72 h-[600px] m-7 sm:mx-auto flex  flex-col items-center">
           <div className="h-fit rounded-3xl">
             <Image
               style={{ borderRadius: "24px" }}
-              src={img}
+              src={props.image}
               alt="missed or found person picture "
               width={300}
               height={350}
