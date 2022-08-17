@@ -8,8 +8,15 @@ export default function CardList() {
     const [cards, setCards] = useState([])
 
     const getAllCard = async () =>{
-      const res= await axios.get("http://localhost:8000/api/post")
-      setCards(res.data.data);
+      console.log("getalll")
+      await axios.get("http://localhost:8000/api/post")
+      .then(res =>{
+        console.log("rrr ",res.data)
+        setCards(res.data.data);
+      
+        
+      })
+     
   
     }
   
@@ -24,7 +31,8 @@ export default function CardList() {
      
 
          <div className=' flex-wrap flex justify-around'>
-             {cards.map((card) =>{              
+             {cards.map((card) =>{   
+               console.log('dvdfd', card.user)           
                  return(
                   
                      <HomeCarde key={card.id} id={card.id} image={`http://localhost:8000/uploads/posts/${card.image}`} status={card.status} gender={card.gender} address={card.address} userEmail={card.user.email} userPhone={card.user.phone_number} />

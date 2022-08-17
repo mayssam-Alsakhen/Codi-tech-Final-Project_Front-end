@@ -1,13 +1,10 @@
-import React from "react";
 import Card from "../components/Card";
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import Popup from "../components/Reusable/Popup";
 
 export default function Missed() {
   const [mainCards, setMainCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
-  // const [ open, setOpen] = useState(false)
 
   const getCards = async () => {
     setIsLoading(true)
@@ -40,22 +37,27 @@ export default function Missed() {
     // </div>)
     // }
     // </>
-    <div 
-    // onClick={() => setOpen(true)}
-    >
+    <div>
       {mainCards.map((mainCard) => {
+        let date = mainCard.created_at
+        let postDate = date.substring(0, 10);
+        let status = (mainCard.status)
         return (
+          <div key={mainCard.id} 
+          >
+            {status == 'Missed' ?
           <Card 
+          date= {postDate}
           id={mainCard.id}
           key={mainCard.id}
           time={mainCard.created}
           description={mainCard.description}
+          image={`http://localhost:8000/uploads/posts/${mainCard.image}`}
            />
+           :""}
+           </div>
         );
       })}
-     {/* <Popup trigger={open} onBlur={() => setOpen(false)}>
-      <h1 className="  mt-11"> hello popup</h1>
-     </Popup> */}
     </div>
   );
 }

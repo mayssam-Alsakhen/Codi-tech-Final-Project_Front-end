@@ -13,6 +13,7 @@ export default function Login() {
   const [data, setData] = useState({});
   const [user, setUser] = useState ({});
   const [open, setOpen] = useState(false)
+  const [reg, setReg] = useState(false)
   const register = useRef();
   useEffect(() => {
     const sign_in_btn = document.querySelector("#sign-in-btn");
@@ -52,7 +53,8 @@ export default function Login() {
       e.preventDefault();
       await axios.post("http://localhost:8000/api/register", data);
       console.log('success');
-      router.push('/')
+      setReg(true)
+      // router.push('/')
     }
      catch (error) {
       console.log(error);
@@ -73,6 +75,7 @@ export default function Login() {
 
         localStorage.setItem("user_data", response.data.token)
         localStorage.setItem('id' , response.data.user.id )
+        localStorage.setItem('name' , response.data.user.name )
         router.push('/')
         //save the token in the local storage
         //then navigate home page
@@ -156,7 +159,7 @@ export default function Login() {
                 </div>
                 <input
                   type="text"
-                  name="phone number"
+                  name="phone_number"
                   autoComplete="phone number"
                   placeholder="Phone Number"
                   required
@@ -250,6 +253,11 @@ export default function Login() {
         <Popup trigger={open} onBlur={() => setOpen(false)}>
         <h1 className=" text-xl mt-11">Email Or Password Are Not Exist. <br/> Please Try Again.</h1>
        </Popup>
+
+       <Popup trigger={reg} onBlur={() =>(router.push('/'), setReg(false))}>
+        <h1 className=" text-xl mt-11">yor account was added successfully <br/> Please login to add a post or comments.&#129299;</h1>
+       </Popup>
+
       </div>
     </>
   );

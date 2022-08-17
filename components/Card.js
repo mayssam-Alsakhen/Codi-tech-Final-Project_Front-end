@@ -19,7 +19,7 @@ const Card = (props) => {
           className="flex w-60 sm:w-52 relative z-10 mr-[-10%] md:mr-0 md:mb-[-15%] sm:mb-[-24%]"
         >
           <Image
-            src={missed}
+            src={props.image}
             alt=" missed or found person"
             width={270}
             height={240}
@@ -36,7 +36,7 @@ const Card = (props) => {
           style={{ boxShadow: "0px 0px 30px 1px rgb(100 100 100)" }}
         >
           <div className="w-[80%] md:w-full flex-col flex justify-between ">
-            <h1 className=" text-3xl capitalize text-center"> 20/20/2022</h1>
+            <h1 className=" text-3xl capitalize text-center"> {props.date}</h1>
             <div
               className={`block rounded-xl w-[60%] mx-auto h-[6px] bg-primary`}
             />

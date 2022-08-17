@@ -5,17 +5,21 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Button from "../components/Reusable/Button";
 import { useRouter } from "next/router";
+import Popup from "../components/Reusable/Popup";
 
 function Add() {
   let router = useRouter();
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   const [name, setName] = useState('');
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
   const [status, setStatus] = useState('');
   const [address, setAddress] = useState('');
   const [description, setDescription] = useState('');
+  const [added, setAdded] = useState(false);
+  const [unAdded, setUnAdded] = useState(false)
+  const [axErr, setAxErr] = useState(false)
 
  
   const handleSubmit = async (e) => {
@@ -41,8 +45,17 @@ function Add() {
     try {
       let res = await axios.post("http://localhost:8000/api/post", formData, config);
       console.log("response ",res)
+      if(res.status==200){
+        console.log("fineadd")
+        setAdded(true)
+      }
+      else{
+        console.log('nop')
+        setUnAdded(true)
+      }
     } catch (err) {
       console.log(err);
+      setAxErr(true)
     }
   };
 
@@ -285,6 +298,17 @@ function Add() {
             fontSize="20px"
           />
         </form>
+        <Popup trigger={added} onBlur={() => (setAdded(false), router.push('/'))}>
+      <h1 className="text-xl  mt-11 capitalize"> your post is added successfully.<br/> thank you &#128571;</h1>
+     </Popup>
+
+     <Popup trigger={unAdded} onBlur={() => (setUnAdded(false))}>
+      <h1 className="text-xl  mt-11 capitalize"> something went wrong.<br/> please try again &#128533;</h1>
+     </Popup>
+
+     <Popup trigger={axErr} onBlur={() => (setAxErr(false))}>
+      <h1 className="text-xl  mt-11 capitalize">something went wrong.<br/> please make sure you entered all the required fieleds, the image and you logged in then try again</h1>
+     </Popup>
       </div>
     </div>
   );

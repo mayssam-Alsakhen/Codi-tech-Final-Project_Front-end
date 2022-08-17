@@ -49,7 +49,8 @@ const Profile = ({ dataFetched }) => {
     try{
       await axios.delete(`http://localhost:8000/api/post/${id}`)
       setDeleted(true)
-       router.push('/')
+    
+      //  router.push('/')
     }catch(err){
       setUnDeleted(true)
      console.log(err)
@@ -61,7 +62,8 @@ const Profile = ({ dataFetched }) => {
   useEffect(()=>{
     let userid = localStorage.getItem('id')
     let id = dataFetched.user.id
-   
+    console.log('hhhh', postdata)
+    
     if(userid == id){
       setYour(true)
       console.log('true..')
@@ -79,8 +81,9 @@ const Profile = ({ dataFetched }) => {
       <Heading text="profile" />
       <div className=" flex items-center justify-center md:flex-col">
         <div className="w-1/4 mr-10 flex md:w-1/2 sm:w-[90%] md:mr-0 md:mb-6 flex-col">
+        
           <Image
-            src={missed}
+            src={`http://localhost:8000/uploads/posts/${postdata.image}`}
             alt="missed or found people  image"
             width={300}
             height={300}
@@ -125,13 +128,14 @@ const Profile = ({ dataFetched }) => {
               <div className="flex justify-around items-center my-3">
                 {" "}
                 <AiFillPhone className=" text-3xl mx-2" />{" "}
-                <p className=" text-lg"> {postdata.user.phone_number}</p>
+                <p className=" text-lg">{ postdata.user.phone_number}</p>
               </div>
             </div>
           </div>
         </div>
-        <Popup trigger={deleted} onBlur={() => setDeleted(false)}>
+        <Popup trigger={deleted} onBlur={() => {router.push('/'), setDeleted(false)}}>
       <h1 className="text-xl  mt-11 capitalize"> The post was deleted successfully.</h1>
+      
      </Popup>
 
      <Popup trigger={unDeleted} onBlur={() => setUnDeleted(false)}>
