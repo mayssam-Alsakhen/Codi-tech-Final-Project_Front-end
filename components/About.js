@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Image from "next/image";
 import about from "../public/abouts.webp";
 import Heading from "./Reusable/Heading";
@@ -14,7 +15,7 @@ export default function About() {
           anything about their background, family name, home address or any
           information that can help bring them back to their families and their
           home.
-          <u className=" cursor-pointer py-3 w-56 text-primary"><a href="/about">Read More</a></u>
+          <u className=" cursor-pointer py-3 w-56 text-primary"><Link href="/about">Read More</Link></u>
 
         </div>
 

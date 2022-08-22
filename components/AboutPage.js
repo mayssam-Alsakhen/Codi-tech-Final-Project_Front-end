@@ -33,7 +33,7 @@ export default function AboutPage() {
   <Image src={register} alt="login button for missing and found" width={500} height={300} />
   </div>
   <p className=" text-start w-[60%] md:w-[95%] mx-auto">
-- Fill the form to log in, If you do not have an account click on 'register' button and submit it.
+- Fill the form to log in, If you do not have an account click on &apos;register&apos; button and submit it.
 </p>
 </div>
 <div className=" gap-32 flex  items-center md:flex-col md:gap-5 py-3">
@@ -41,7 +41,7 @@ export default function AboutPage() {
   <Image src={add} alt="add button for missing and found" width={300} height={150} />
   </div>
   <p className=" text-start w-[60%] md:w-[95%] mx-auto">
-- After that you can click on 'Add A Post' button below.
+- After that you can click on &apos;Add A Post&apos; button below.
 </p>
 </div>
 <div className=" gap-32 flex  items-center md:flex-col md:gap-5 py-3">
@@ -49,7 +49,7 @@ export default function AboutPage() {
   <Image src={form} alt="add form missing and found" width={300} height={150} />
   </div>
   <p className=" text-start w-[60%] md:w-[95%] mx-auto">
-- Fill all the form to the end and add it by clicking 'Add' button.
+- Fill all the form to the end and add it by clicking &apos;Add&apos; button.
 </p>
 </div>
 </div>
