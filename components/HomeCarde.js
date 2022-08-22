@@ -1,5 +1,4 @@
 import Image from "next/image";
-import img from "../public/missed.jpeg";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { SiGmail } from "react-icons/si";
@@ -28,7 +27,7 @@ export default function HomeCarde(props) {
             <Image
               style={{ borderRadius: "24px" }}
               src={props.image}
-              alt="missed or found person picture "
+              alt="missing or found person picture "
               width={300}
               height={350}
             />

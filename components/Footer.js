@@ -104,12 +104,12 @@ export default function Footer() {
         </div>
         <div className="w-1/4 text-center place-self-center md:w-full">
           <div>
-            <Image src={logo} alt="missed and found" width={150} height={130}/>
+            <Image src={logo} alt="missing and found" width={150} height={130}/>
           </div>
         </div>
       </div>
       <div className=" bg-primary text-white text-center py-1">
-        Copyright © {new Date().getFullYear()} Missed & Found
+        Copyright © {new Date().getFullYear()} Missing & Found
       </div>
     </div>
     <Popup trigger={open} onBlur={() => setOpen(false)}>

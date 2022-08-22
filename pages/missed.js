@@ -45,7 +45,7 @@ export default function Missed() {
         return (
           <div key={mainCard.id} 
           >
-            {status == 'Missed' ?
+            {status == 'Missing' ?
           <Card 
           date= {postDate}
           id={mainCard.id}

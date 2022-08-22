@@ -15,7 +15,7 @@ export default function HeaderH() {
           <div className=" text-white w-fit sm:w-[60%] text-5xl md:text-3xl font-bold p-9 h-[40%] flex items-center ">
             <TextAnimation.Flip
               target="Merciful"
-              text={["MISSED PERSON", "FOUND PERSON", "COMMENT TO HELP"]}
+              text={["Missing PERSON", "FOUND PERSON", "COMMENT TO HELP"]}
               animation={{
                 duration: 1000,
                 delay: 3000,

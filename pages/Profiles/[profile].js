@@ -1,5 +1,4 @@
 import Image from "next/image";
-import missed from "../../public/missed.jpg";
 import { AiFillPhone } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import { ImLocation2 } from "react-icons/im";
@@ -84,7 +83,7 @@ const Profile = ({ dataFetched }) => {
         
           <Image
             src={`http://localhost:8000/uploads/posts/${postdata.image}`}
-            alt="missed or found people  image"
+            alt="missing or found people  image"
             width={300}
             height={300}
           />

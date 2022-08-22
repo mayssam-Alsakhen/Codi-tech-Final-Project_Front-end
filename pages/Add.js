@@ -183,8 +183,8 @@ function Add() {
 
               >
                 <option></option>
-                <option   onChange={ (e)=> setStatus(e.target.value)}>Missed</option>
-                <option   onChange={ (e)=> setStatus(e.target.value)}>Found</option>
+                <option value='Missing'  onChange={ (e)=> setStatus(e.target.value)}>Missing</option>
+                <option value='Found'  onChange={ (e)=> setStatus(e.target.value)}>Found</option>
               </select>
 
               {/* <Input

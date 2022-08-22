@@ -12,6 +12,7 @@ export default function Comment() {
   const [ unDeleted, setUnDeleted] = useState(false)
   const [your, setYour] = useState(false)
   const [name, setName] = useState('')
+  const [namee, setNamee] = useState()
   const { query } = useRouter();
   const form  = useRef();
 
@@ -30,25 +31,13 @@ export default function Comment() {
     }
   },[])
 
-  // useEffect(()=>{
-  //   let userid = localStorage.getItem('id')
-  //   let id = dataFetched.user.id
-    
-   
-  //   if(userid == id){
-  //     setYour(true)
-  //     console.log('true..')
-  //   }
-  //   else{
-  //     console.log('no..')
-  //     setYour(false)
-  //   }
-  // },[])
   useEffect(()=>{
     getAllComments();
     let value = localStorage.getItem('name')
-    setName(value)
-
+    
+     setName(value)
+     
+    
   },[])
 
   const getAllComments = async() =>{
@@ -95,12 +84,11 @@ export default function Comment() {
   //  form.current.reset()
  
  }
+// let namee = name.charAt(0)
 
-
-//  const handleSubmitComment = async () => {
-//     let data={post_id: query.profile, message: comment, user_id: }
-//  }
-let namee = name.charAt(0)
+// if(name){
+//   setNamee(name.charAt(0))
+// }
 return (
   <div>
       <div
@@ -109,9 +97,10 @@ return (
         className=" w-full mx-auto h-fit my-5 py-5 px-2"
       >
         <div className=" flex items-center justify-around">
+          {name ? 
           <div className="capitalize  w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-secondary flex justify-center items-center">
-            {namee}
-          </div>
+           {name[0]}
+          </div>  : ''}
           <input
           ref={form}
             type="text"

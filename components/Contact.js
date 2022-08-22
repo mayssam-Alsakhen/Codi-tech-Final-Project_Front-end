@@ -44,7 +44,7 @@ export default function Contact() {
       >
         <div className="flex items-center justify-center w-[35%] h-[580px] bg-secondary md:w-full md:h-[300px] md:border-b-2 md:border-primary">
         <div className="">
-          <Image src={illustration} alt=" contact missed and found" width={400} height={290}/>
+          <Image src={illustration} alt=" contact missing and found" width={400} height={290}/>
           </div>
         </div>
         <div className=" w-[65%] md:w-full h-fit">
@@ -142,7 +142,7 @@ export default function Contact() {
           />
         </div>
         <Popup trigger={open} onBlur={() => setOpen(false)}>
-        <h1 className=" text-xl mt-11">Please Check Your Connection And Try Again.</h1>
+        <h1 className=" text-xl mt-11">your message has sent successfully.<br/>will get back to you as soon as possible. pleasee be patient  &#128525;</h1>
        </Popup>
        <Popup trigger={sent} onBlur={() => setSent(false)}>
         <h1 className="w-[70%] mx-auto text-xl mt-11 capitalize">your message has sent successfully.<br/>will get back to you as soon as possible. pleasee be patient  &#128525;</h1>

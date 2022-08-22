@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { AiOutlineComment } from "react-icons/ai";
-import missed from "../public/missed.jpg";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -20,7 +19,7 @@ const Card = (props) => {
         >
           <Image
             src={props.image}
-            alt=" missed or found person"
+            alt=" missaing or found person"
             width={270}
             height={240}
           />

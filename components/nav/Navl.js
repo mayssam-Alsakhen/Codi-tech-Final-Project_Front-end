@@ -13,7 +13,7 @@ export const Navl =[
     },
     {
         id: 3,
-        title:"Missed",
+        title:"Missing",
         link:"/missed"
     },
     {
