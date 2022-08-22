@@ -54,12 +54,10 @@ export default function Login() {
       await axios.post("http://localhost:8000/api/register", data);
       console.log('success');
       setReg(true)
-      // router.push('/')
     }
      catch (error) {
       console.log(error);
     }
-    //  router.push('/')
     register.current.reset()
   };
 
@@ -230,7 +228,7 @@ export default function Login() {
         <div className="panels-container bg-[url('../public/sign.gif')] bg-contain bg-center bg-no-repeat">
           <div className="panel left-panel  ">
             <div className="content ">
-              <h3>You don't have an account?</h3>
+              <h3>You don&apos;t have an account?</h3>
               <p>Create your account right now to add a post and comments.</p>
               <button className="btn transparent" id="sign-up-btn">
                 Register
