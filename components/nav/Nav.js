@@ -112,7 +112,7 @@ useEffect(()=>{
 </div>
 {Menu ? (
         <div className="bg-primary w-1/3 sm:w-2/3 top-0 bottom-0 right-0 z-30 fixed pt-12 px-2 text-end">
-          <div className="">
+          <div>
             <div
               className="flex justify-end w-full"
               onClick={() => {
