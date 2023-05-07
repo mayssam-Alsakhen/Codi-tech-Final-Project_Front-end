@@ -19,14 +19,14 @@ export default function Comment() {
   useEffect(()=>{
     let userid = localStorage.getItem('id')
     let id = comments.map((co)=>{co.comment_id})
-    console.log('coo', id)
+    // console.log('coo', id)
    
     if(userid == id){
       setYour(true)
-      console.log('true..')
+      // console.log('true..')
     }
     else{
-      console.log('no..')
+      // console.log('no..')
       setYour(false)
     }
   },[])
@@ -47,7 +47,7 @@ export default function Comment() {
         
           
         })
-        .catch(err => { console.log(err.message)})
+        // .catch(err => { console.log(err.message)})
   }
 
   const deletePost = async(id) =>{
@@ -57,7 +57,7 @@ export default function Comment() {
        router.push('/')
     }catch(err){
       setUnDeleted(true)
-     console.log(err)
+    //  console.log(err)
     }}
 
  const handleSubmit = async (e) =>{
@@ -68,7 +68,7 @@ export default function Comment() {
       post_id: query.profile,
       user_id:localStorage.getItem('id')
     });
-    console.log('success')
+    // console.log('success')
     if(response.status == 200){
       getAllComments();
       
@@ -77,18 +77,11 @@ export default function Comment() {
   }
   catch (error) {
    setOpen(true);
-    console.log('faild')
-    console.log(error);
-    console.log(localStorage.getItem('id'))
+    // console.log('faild')
+    // console.log(error);
+    // console.log(localStorage.getItem('id'))
   }
-  //  form.current.reset()
- 
  }
-// let namee = name.charAt(0)
-
-// if(name){
-//   setNamee(name.charAt(0))
-// }
 return (
   <div>
       <div

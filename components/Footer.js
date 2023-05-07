@@ -26,13 +26,12 @@ export default function Footer() {
     e.preventDefault();
     emailjs.sendForm('service_7t8dkcp', 'template_h4shwmb', form.current, 'pJwIzZeW45XFNWPpw')
     .then((result) =>{
-      console.log(result.text);
+      // console.log(result.text);
     },
     (error)=>{
       setOpen(true)
-      console.log(error.text)
+      // console.log(error.text)
     })
-    // e.target.reset()
     form.current
     .reset();
   }

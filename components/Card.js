@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const Card = (props) => {
   useEffect(() => {
-    console.log(props)
+    // console.log(props)
   
   }, [])
   
@@ -42,9 +42,7 @@ const Card = (props) => {
             <div className={`${show ? "block" : "hidden"} p-5`}>
               {props.description}{" "}
             </div>
-            {/* <div
-              className={`block rounded-xl w-[60%] mx-auto h-[6px] bg-primary`}
-            /> */}
+           
             <div className="my-2 flex justify-between items-center">
               <div>
                 <Link href={`/Profiles/`+ props.id}>view profile </Link>

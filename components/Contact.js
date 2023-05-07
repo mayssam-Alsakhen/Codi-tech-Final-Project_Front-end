@@ -17,12 +17,12 @@ export default function Contact() {
     e.preventDefault();
     emailjs.sendForm('service_7t8dkcp', 'template_pwcye9r', form.current, 'pJwIzZeW45XFNWPpw')
     .then((result) =>{
-      console.log(result.text);
+      // console.log(result.text);
       setSent(true)
     },
     (error)=>{
       setOpen(true)
-      console.log(error.text)
+      // console.log(error.text)
     })
     form.current.reset()
   }
@@ -114,7 +114,6 @@ export default function Contact() {
               </label>
               <textarea
                 required
-                // style={{ boxShadow: mouseIn ? "0px 0px 10px 2px #9e0404" : "" }}
                 onBlur={onOut}
                 onFocus={onIn}
                 id="message"

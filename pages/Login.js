@@ -3,7 +3,6 @@ import { AiFillLock } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import { ImLocation2 } from "react-icons/im";
 import { useRouter } from 'next/router'
-// import { AiFillEye } from "react-icons/ai";
 import axios from "axios";
 import { BsTelephoneFill } from "react-icons/bs";
 import React, { useEffect, useState, useRef } from "react";
@@ -27,16 +26,7 @@ export default function Login() {
     sign_in_btn.addEventListener("click", () => {
       container.classList.remove("sign-up-mode");
     });
-    // const togglePassword = document.querySelector("#togglePassword");
-    // const password = document.querySelector("#id_password");
-
-    // togglePassword.addEventListener("click", function (e) {
-    //   const type =
-    //     password.getAttribute("type") === "password" ? "text" : "password";
-    //   password.setAttribute("type", type);
-    //   this.classList.toggle("fa-eye-slash");
-    // });
-
+    
     const toggleReg = document.querySelector("#toggleReg");
     const pass = document.querySelector("#id_reg");
 
@@ -52,11 +42,11 @@ export default function Login() {
     try {
       e.preventDefault();
       await axios.post("http://localhost:8000/api/register", data);
-      console.log('success');
+      // console.log('success');
       setReg(true)
     }
      catch (error) {
-      console.log(error);
+      // console.log(error);
     }
     register.current.reset()
   };
@@ -64,9 +54,9 @@ export default function Login() {
   const submitLogin = async (e) => {
     try {
       e.preventDefault();
-      console.log("user",user)
+      // console.log("user",user)
       let response = await axios.post("http://localhost:8000/api/login", user);
-      console.log('success login',response);
+      // console.log('success login',response);
       if(response.status == 200){
         // let token = response.data.token;
         // console.log("token ",token)
@@ -86,7 +76,7 @@ export default function Login() {
       }
     } catch (error) {
       setOpen(true)
-      console.log(error);
+      // console.log(error);
     }
     register.current.reset()
   };
