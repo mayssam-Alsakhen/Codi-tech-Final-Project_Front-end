@@ -17,12 +17,12 @@ export default function Contact() {
     e.preventDefault();
     emailjs.sendForm('service_7t8dkcp', 'template_pwcye9r', form.current, 'pJwIzZeW45XFNWPpw')
     .then((result) =>{
-      // console.log(result.text);
+      console.log(result.text);
       setSent(true)
     },
     (error)=>{
       setOpen(true)
-      // console.log(error.text)
+      console.log(error.text)
     })
     form.current.reset()
   }

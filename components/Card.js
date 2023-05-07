@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const Card = (props) => {
   useEffect(() => {
-    // console.log(props)
+    console.log(props)
   
   }, [])
   

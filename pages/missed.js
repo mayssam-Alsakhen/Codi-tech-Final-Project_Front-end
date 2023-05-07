@@ -14,7 +14,7 @@ export default function Missed() {
       setIsLoading(false)
       setMainCards(res.data.data);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 

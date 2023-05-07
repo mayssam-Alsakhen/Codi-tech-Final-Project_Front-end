@@ -52,7 +52,7 @@ const Profile = ({ dataFetched }) => {
       //  router.push('/')
     }catch(err){
       setUnDeleted(true)
-    //  console.log(err)
+     console.log(err)
     }
   
   }
@@ -61,14 +61,14 @@ const Profile = ({ dataFetched }) => {
   useEffect(()=>{
     let userid = localStorage.getItem('id')
     let id = dataFetched.user.id
-    // console.log('hhhh', postdata)
+    console.log('hhhh', postdata)
     
     if(userid == id){
       setYour(true)
-      // console.log('true..')
+      console.log('true..')
     }
     else{
-      // console.log('no..')
+      console.log('no..')
       setYour(false)
     }
   },[])

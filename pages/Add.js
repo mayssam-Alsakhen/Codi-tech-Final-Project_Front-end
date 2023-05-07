@@ -39,22 +39,22 @@ function Add() {
 
   };
 
-  //  console.log("formData ",formData)
+   console.log("formData ",formData)
 
     //here i mean you need to add the token in the header
     try {
       let res = await axios.post("http://localhost:8000/api/post", formData, config);
-      // console.log("response ",res)
+      console.log("response ",res)
       if(res.status==200){
-        // console.log("fineadd")
+        console.log("fineadd")
         setAdded(true)
       }
       else{
-        // console.log('nop')
+        console.log('nop')
         setUnAdded(true)
       }
     } catch (err) {
-      // console.log(err);
+      console.log(err);
       setAxErr(true)
     }
   };

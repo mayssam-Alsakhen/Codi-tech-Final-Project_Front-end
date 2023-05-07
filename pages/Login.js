@@ -42,11 +42,11 @@ export default function Login() {
     try {
       e.preventDefault();
       await axios.post("http://localhost:8000/api/register", data);
-      // console.log('success');
+      console.log('success');
       setReg(true)
     }
      catch (error) {
-      // console.log(error);
+      console.log(error);
     }
     register.current.reset()
   };
@@ -54,9 +54,9 @@ export default function Login() {
   const submitLogin = async (e) => {
     try {
       e.preventDefault();
-      // console.log("user",user)
+      console.log("user",user)
       let response = await axios.post("http://localhost:8000/api/login", user);
-      // console.log('success login',response);
+      console.log('success login',response);
       if(response.status == 200){
         // let token = response.data.token;
         // console.log("token ",token)
@@ -76,7 +76,7 @@ export default function Login() {
       }
     } catch (error) {
       setOpen(true)
-      // console.log(error);
+      console.log(error);
     }
     register.current.reset()
   };
