@@ -27,17 +27,17 @@ import Button from "../../components/Reusable/Button";
 //   };
 // };
 
-// export const getStaticProps = async (context) => {
-//   // const userData = await res.json()
-//   const profile = context.params.profile;
-//   const res = await axios.get(`http://localhost:8000/api/post/${profile}`);
-//   // const response = await res[id]
-//   return {
-//     props: {
-//       dataFetched: res.data.data,
-//     },
-//   };
-// };
+export const getStaticProps = async (context) => {
+  // const userData = await res.json()
+  const profile = context.params.profile;
+  const res = await axios.get(`http://localhost:8000/api/post/${profile}`);
+  // const response = await res[id]
+  return {
+    props: {
+      dataFetched: res.data.data,
+    },
+  };
+};
 
 
 const Profile = ({ dataFetched }) => {
