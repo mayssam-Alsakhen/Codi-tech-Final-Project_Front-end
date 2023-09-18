@@ -13,19 +13,19 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Button from "../../components/Reusable/Button";
 
-// export const getStaticPaths = async () => {
-//   const res = await axios.get("http://localhost:8000/api/post");
-//   const fetch = res.data.data;
-//   const paths = fetch.map((m) => {
-//     return {
-//       params: { profile: m.id.toString() },
-//     };
-//   });
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
+export const getStaticPaths = async () => {
+  const res = await axios.get("http://localhost:8000/api/post");
+  const fetch = res.data.data;
+  const paths = fetch.map((m) => {
+    return {
+      params: { profile: m.id.toString() },
+    };
+  });
+  return {
+    paths,
+    fallback: false,
+  };
+};
 
 export const getStaticProps = async (context) => {
   // const userData = await res.json()
