@@ -41,6 +41,7 @@ export const getStaticProps = async (context) => {
 
 
 const Profile = ({ dataFetched }) => {
+
   const [ deleted, setDeleted] = useState(false)
   const [ unDeleted, setUnDeleted] = useState(false)
   let router= useRouter();
@@ -74,7 +75,7 @@ const Profile = ({ dataFetched }) => {
   },[])
   return (
     <div className="pb-20">
-      {your?
+      {/* {your?
       <div className=" mt-16 ">
       <Button onClick={()=>{deletePost(postdata.id)}} text="Delete" border="2px solid #9e0404" color="#9e0404"/> </div>: ''}
       <Heading text="profile" />
@@ -141,7 +142,7 @@ const Profile = ({ dataFetched }) => {
       <h1 className="text-xl  mt-11 capitalize"> The post did not delete, please try again.</h1>
      </Popup>
      
-      </div>
+      </div> */}
     </div>
   );
 };
