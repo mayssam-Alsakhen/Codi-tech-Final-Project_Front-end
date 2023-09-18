@@ -14,6 +14,7 @@ import axios from "axios";
 // import Button from "../../components/Reusable/Button";
 
 export const getStaticPaths = async () => {
+  try {
   const res = await axios.get("http://localhost:8000/api/post");
   const fetch = res.data.data;
   const paths = fetch.map((m) => {
@@ -25,18 +26,38 @@ export const getStaticPaths = async () => {
     paths,
     fallback: false,
   };
+}
+catch (error) {
+  console.error("Error fetching data:", error);
+  return {
+    paths: [],
+    fallback: false,
+  };
+}
 };
 
 export const getStaticProps = async (context) => {
   // const userData = await res.json()
+  // const { profile } = context.params;
+
   const profile = context.params.profile;
-  const res = await axios.get(`http://localhost:8000/api/post/${profile}`);
+  try{ const res = await axios.get(`http://localhost:8000/api/post/${profile}`);
   // const response = await res[id]
   return {
     props: {
       dataFetched: res.data.data,
     },
-  };
+  };}
+  catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        dataFetched: null,
+      },
+    };
+  }
+  
+ 
 };
 
 
