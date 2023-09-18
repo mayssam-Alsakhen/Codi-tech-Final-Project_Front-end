@@ -1,17 +1,17 @@
-import Image from "next/image";
-import { AiFillPhone } from "react-icons/ai";
-import { MdEmail } from "react-icons/md";
-import { ImLocation2 } from "react-icons/im";
-import { FaUsers } from "react-icons/fa";
-import Heading from "../../components/Reusable/Heading";
-import { FaTransgender } from "react-icons/fa";
-import { MdPersonRemoveAlt1 } from "react-icons/md";
-import Comment from "../../components/Comment";
-import Popup from "../../components/Reusable/Popup";
+// import Image from "next/image";
+// import { AiFillPhone } from "react-icons/ai";
+// import { MdEmail } from "react-icons/md";
+// import { ImLocation2 } from "react-icons/im";
+// import { FaUsers } from "react-icons/fa";
+// import Heading from "../../components/Reusable/Heading";
+// import { FaTransgender } from "react-icons/fa";
+// import { MdPersonRemoveAlt1 } from "react-icons/md";
+// import Comment from "../../components/Comment";
+// import Popup from "../../components/Reusable/Popup";
 import axios from "axios";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Button from "../../components/Reusable/Button";
+// import { useRouter } from "next/router";
+// import { useEffect, useState } from "react";
+// import Button from "../../components/Reusable/Button";
 
 export const getStaticPaths = async () => {
   const res = await axios.get("http://localhost:8000/api/post");
@@ -54,6 +54,7 @@ const Profile = ({ dataFetched }) => {
   //   }catch(err){
   //     setUnDeleted(true)
   //    console.log(err)
+  //
   //   }
   
   // }
