@@ -42,37 +42,37 @@ export const getStaticProps = async (context) => {
 
 const Profile = ({ dataFetched }) => {
 
-  const [ deleted, setDeleted] = useState(false)
-  const [ unDeleted, setUnDeleted] = useState(false)
-  let router= useRouter();
-  const deletePost = async(id) =>{
-    try{
-      await axios.delete(`http://localhost:8000/api/post/${id}`)
-      setDeleted(true)
+  // const [ deleted, setDeleted] = useState(false)
+  // const [ unDeleted, setUnDeleted] = useState(false)
+  // let router= useRouter();
+  // const deletePost = async(id) =>{
+  //   try{
+  //     await axios.delete(`http://localhost:8000/api/post/${id}`)
+  //     setDeleted(true)
     
-      //  router.push('/')
-    }catch(err){
-      setUnDeleted(true)
-     console.log(err)
-    }
+  //     //  router.push('/')
+  //   }catch(err){
+  //     setUnDeleted(true)
+  //    console.log(err)
+  //   }
   
-  }
-  const [postdata, setPostdata] = useState(dataFetched);
-  const [your, setYour] = useState(false)
-  useEffect(()=>{
-    let userid = localStorage.getItem('id')
-    let id = dataFetched.user.id
-    console.log('hhhh', postdata)
+  // }
+  // const [postdata, setPostdata] = useState(dataFetched);
+  // const [your, setYour] = useState(false)
+  // useEffect(()=>{
+  //   let userid = localStorage.getItem('id')
+  //   let id = dataFetched.user.id
+  //   console.log('hhhh', postdata)
     
-    if(userid == id){
-      setYour(true)
-      console.log('true..')
-    }
-    else{
-      console.log('no..')
-      setYour(false)
-    }
-  },[])
+  //   if(userid == id){
+  //     setYour(true)
+  //     console.log('true..')
+  //   }
+  //   else{
+  //     console.log('no..')
+  //     setYour(false)
+  //   }
+  // },[])
   return (
     <div className="pb-20">
       {/* {your?
