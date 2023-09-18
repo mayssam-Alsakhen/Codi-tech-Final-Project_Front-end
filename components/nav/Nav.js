@@ -22,7 +22,7 @@ export default function Nav() {
 const [token, setToken] = useState('');
 useEffect(()=>{
   setToken(localStorage.getItem('user_data'))
-})
+}, [])
   var primary = "#9e0404";
   const [Menu, setMenu] = useState(false);
   const completion = UseReadingProgress();

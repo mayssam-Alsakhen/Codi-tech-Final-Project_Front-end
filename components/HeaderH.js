@@ -7,7 +7,7 @@ export default function HeaderH() {
   const [add, setAdd] = useState()
   useEffect(()=>{
     setAdd(localStorage.getItem('user_data'))
-  })
+  }, [])
   return (
     <div>
       <div className="  bg-[url('../public/home.jpg')] w-full h-[700px]  bg-cover bg-center bg-no-repeat">
