@@ -1,17 +1,17 @@
-// import Image from "next/image";
-// import { AiFillPhone } from "react-icons/ai";
-// import { MdEmail } from "react-icons/md";
-// import { ImLocation2 } from "react-icons/im";
-// import { FaUsers } from "react-icons/fa";
-// import Heading from "../../components/Reusable/Heading";
-// import { FaTransgender } from "react-icons/fa";
-// import { MdPersonRemoveAlt1 } from "react-icons/md";
-// import Comment from "../../components/Comment";
-// import Popup from "../../components/Reusable/Popup";
+import Image from "next/image";
+import { AiFillPhone } from "react-icons/ai";
+import { MdEmail } from "react-icons/md";
+import { ImLocation2 } from "react-icons/im";
+import { FaUsers } from "react-icons/fa";
+import Heading from "../../components/Reusable/Heading";
+import { FaTransgender } from "react-icons/fa";
+import { MdPersonRemoveAlt1 } from "react-icons/md";
+import Comment from "../../components/Comment";
+import Popup from "../../components/Reusable/Popup";
 import axios from "axios";
-// import { useRouter } from "next/router";
-// import { useEffect, useState } from "react";
-// import Button from "../../components/Reusable/Button";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Button from "../../components/Reusable/Button";
 
 export const getStaticPaths = async () => {
   try {
@@ -63,41 +63,41 @@ export const getStaticProps = async (context) => {
 
 const Profile = ({ dataFetched }) => {
 
-  // const [ deleted, setDeleted] = useState(false)
-  // const [ unDeleted, setUnDeleted] = useState(false)
-  // let router= useRouter();
-  // const deletePost = async(id) =>{
-  //   try{
-  //     await axios.delete(`http://localhost:8000/api/post/${id}`)
-  //     setDeleted(true)
+  const [ deleted, setDeleted] = useState(false)
+  const [ unDeleted, setUnDeleted] = useState(false)
+  let router= useRouter();
+  const deletePost = async(id) =>{
+    try{
+      await axios.delete(`http://localhost:8000/api/post/${id}`)
+      setDeleted(true)
     
-  //     //  router.push('/')
-  //   }catch(err){
-  //     setUnDeleted(true)
-  //    console.log(err)
-  //
-  //   }
+      //  router.push('/')
+    }catch(err){
+      setUnDeleted(true)
+     console.log(err)
   
-  // }
-  // const [postdata, setPostdata] = useState(dataFetched);
-  // const [your, setYour] = useState(false)
-  // useEffect(()=>{
-  //   let userid = localStorage.getItem('id')
-  //   let id = dataFetched.user.id
-  //   console.log('hhhh', postdata)
+    }
+  
+  }
+  const [postdata, setPostdata] = useState(dataFetched);
+  const [your, setYour] = useState(false)
+  useEffect(()=>{
+    let userid = localStorage.getItem('id')
+    let id = dataFetched.user.id
+    console.log('hhhh', postdata)
     
-  //   if(userid == id){
-  //     setYour(true)
-  //     console.log('true..')
-  //   }
-  //   else{
-  //     console.log('no..')
-  //     setYour(false)
-  //   }
-  // },[])
+    if(userid == id){
+      setYour(true)
+      console.log('true..')
+    }
+    else{
+      console.log('no..')
+      setYour(false)
+    }
+  },[])
   return (
     <div className="pb-20">
-      {/* {your?
+      {your?
       <div className=" mt-16 ">
       <Button onClick={()=>{deletePost(postdata.id)}} text="Delete" border="2px solid #9e0404" color="#9e0404"/> </div>: ''}
       <Heading text="profile" />
@@ -164,7 +164,7 @@ const Profile = ({ dataFetched }) => {
       <h1 className="text-xl  mt-11 capitalize"> The post did not delete, please try again.</h1>
      </Popup>
      
-      </div> */}
+      </div>
     </div>
   );
 };
